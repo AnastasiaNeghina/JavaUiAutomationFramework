@@ -57,6 +57,5 @@
             <artifactId>selenium-safari-driver</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
     </dependencies>
 </project>
