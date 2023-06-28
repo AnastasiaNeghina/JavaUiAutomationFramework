@@ -2,6 +2,7 @@ package com.opencart.managers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -18,6 +19,11 @@ public class DriverManager {
     private DriverManager() {
         switch (webDriverType.toUpperCase()) {
             case "CHROME":
+                ChromeOptions options = new ChromeOptions();
+//               argumentul din metoda este utilizat pentru a deschide fereastra in modul incognito
+                options.addArguments("--incognito");
+//               argumentul din metoda este utilizat pentru a rula browserul in modul fara interfata grafica = operatiunile sunt facute fara a deschide o fereastra
+//                options.addArguments("--headless");
                 driver = new ChromeDriver();
                 System.out.println("The Chrome Driver was initiated!");
                 break;
