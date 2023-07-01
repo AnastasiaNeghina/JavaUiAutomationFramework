@@ -1,6 +1,4 @@
 package com.opencart.pageobjects;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,11 +8,11 @@ public class LoginPage extends Page {
         super(driver);
     }
 
-    @FindBy(id = "input-email")
+    @FindBy(css = "#input-email")
     protected WebElement emailAddressInput;
-    @FindBy(id = "input-password")
+    @FindBy(css = "#input-password")
     protected WebElement passwordInput;
-    @FindBy(xpath = "//button[normalize-space()='Login']")
+    @FindBy(css = "button[type='submit']")
     protected WebElement loginBtn;
 
     public void fillInTheLoginForm(String email, String password) {

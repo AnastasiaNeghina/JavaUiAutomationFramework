@@ -7,8 +7,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.util.Locale;
-
 public class DriverManager {
     //    Declaram 3 proprietati private: webDriverType, instance si driver
     private static String webDriverType = "Chrome";
@@ -24,7 +22,7 @@ public class DriverManager {
                 options.addArguments("--incognito");
 //               argumentul din metoda este utilizat pentru a rula browserul in modul fara interfata grafica = operatiunile sunt facute fara a deschide o fereastra
 //                options.addArguments("--headless");
-                driver = new ChromeDriver();
+                driver = new ChromeDriver(options);
                 System.out.println("The Chrome Driver was initiated!");
                 break;
             case "FIREFOX":
