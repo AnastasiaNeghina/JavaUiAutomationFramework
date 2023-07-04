@@ -5,15 +5,15 @@ Feature: Register Flow Feature Test Suite
     Given Home page is accessed
     And RegisterPage is accessed from HomePage menu
     When the registration form is completed with valid random data
-    And the privacyToggle is enabled
-    And the continueButton is clicked
+    When "privacyPolicyToggle" from "RegisterPage" is clicked
+    And "continueBtn" from "RegisterPage" is clicked
     Then the current url contains the following keyword: "success"
 
   Scenario: User remains on Register Page when continue button is not clicked during register flow
     Given Home page is accessed
     And RegisterPage is accessed from HomePage menu
     When the registration form is completed with valid random data
-    And the privacyToggle is enabled
+    When "privacyPolicyToggle" from "RegisterPage" is clicked
     Then the current url contains the following keyword: "register"
 
   @Regression
@@ -21,7 +21,7 @@ Feature: Register Flow Feature Test Suite
     Given Home page is accessed
     And RegisterPage is accessed from HomePage menu
     When the registration form is completed with valid random data
-    And the continueButton is clicked
+    And "continueBtn" from "RegisterPage" is clicked
     Then the current url contains the following keyword: "register"
 
   @run
@@ -33,7 +33,7 @@ Feature: Register Flow Feature Test Suite
       | lastname  | <lastname>  |
       | email     | <email>     |
       | password  | <password>  |
-    When the continueButton is clicked
+    When "continueBtn" from "RegisterPage" is clicked
     Then the following error messages are displayed:
       | Warning: You must agree to the Privacy Policy!   |
       | <attribute> must be between 1 and 32 characters! |

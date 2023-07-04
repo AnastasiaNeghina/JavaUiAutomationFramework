@@ -9,7 +9,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverManager {
     //    Declaram 3 proprietati private: webDriverType, instance si driver
-    private static String webDriverType = "Chrome";
+    private static String webDriverType = ConfigReaderManager.getProperty("browserType");
     private static DriverManager instance;
     private WebDriver driver;
 
@@ -19,7 +19,9 @@ public class DriverManager {
             case "CHROME":
                 ChromeOptions options = new ChromeOptions();
 //               argumentul din metoda este utilizat pentru a deschide fereastra in modul incognito
-                options.addArguments("--incognito");
+                if (ConfigReaderManager.getProperty("isIncognitoChromeEnabled").equals("true")){
+                    options.addArguments("--incognito");
+                }
 //               argumentul din metoda este utilizat pentru a rula browserul in modul fara interfata grafica = operatiunile sunt facute fara a deschide o fereastra
 //                options.addArguments("--headless");
                 driver = new ChromeDriver(options);

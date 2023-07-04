@@ -6,6 +6,7 @@ import com.opencart.pageobjects.RegisterPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+
 import java.util.Map;
 
 public class RegisterPageSteps {
@@ -21,16 +22,6 @@ public class RegisterPageSteps {
 
         registerPage.fillInTheRegisterForm(firstName, lastName, email, password);
 
-    }
-
-    @And("the privacyToggle is enabled")
-    public void thePrivacyToggleIsEnabled() throws InterruptedException {
-        registerPage.switchOnThePrivacyPolicyToggle(driver);
-    }
-
-    @And("the continueButton is clicked")
-    public void theContinueButtonIsClicked() throws InterruptedException {
-        registerPage.clickOnContinueBtn();
     }
 
     @And("the registration form is completed with the following data:")
