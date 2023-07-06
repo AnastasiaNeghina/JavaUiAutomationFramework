@@ -1,10 +1,14 @@
 package com.opencart.stepdefinitions;
 
 import com.opencart.managers.DriverManager;
+import com.opencart.managers.ExplicitWaitManager;
 import com.opencart.managers.ScrollManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +19,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class GenericSteps {
+    private static final Logger logger = LogManager.getLogger(GenericSteps.class);
     WebDriver driver = DriverManager.getInstance().getDriver();
 
     @Given("the {string} is accessed")
     public void theIsAccessed(String urlValue) {
         driver.get(urlValue);
-        System.out.println("The " + urlValue + " was accessed by the Driver!");
+        logger.log(Level.INFO, "The " + urlValue + " was accessed by the Driver!");
     }
 
     @Then("the following error messages are displayed:")
@@ -38,7 +43,7 @@ public class GenericSteps {
     public void theCurrentUrlContainsTheFollowingKeyword(String keyword) throws InterruptedException {
         Thread.sleep(500);
         boolean urlContainsCollectString = driver.getCurrentUrl().contains(keyword);
-        System.out.println(driver.getCurrentUrl());
+        logger.log(Level.INFO, driver.getCurrentUrl());
         Assertions.assertTrue(urlContainsCollectString, "The " + keyword + " is present within the URL");
     }
 
@@ -49,6 +54,7 @@ public class GenericSteps {
         webElementField.setAccessible(true);
         WebElement webElementToBeClicked = (WebElement) webElementField.get(classInstance.getConstructor(WebDriver.class).newInstance(driver));
         ScrollManager.scrollToElement(webElementToBeClicked);
+        ExplicitWaitManager.waitTillElementIsClickable(webElementToBeClicked);
         webElementToBeClicked.click();
     }
 }

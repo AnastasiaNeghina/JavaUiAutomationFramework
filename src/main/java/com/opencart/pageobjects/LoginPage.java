@@ -1,4 +1,7 @@
 package com.opencart.pageobjects;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,6 +10,8 @@ public class LoginPage extends Page {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
+
+    private static final Logger logger = LogManager.getLogger(Page.class);
 
     @FindBy(css = "#input-email")
     protected WebElement emailAddressInput;
@@ -17,14 +22,14 @@ public class LoginPage extends Page {
 
     public void fillInTheLoginForm(String email, String password) {
         emailAddressInput.sendKeys(email);
-        System.out.println("The entered Email is: " + email);
+        logger.info("The entered Email is: " + email);
         passwordInput.sendKeys(password);
-        System.out.println("The entered Password is: " + password);
+        logger.info("The entered Password is: " + password);
     }
 
     public void clickOnLoginBtn() {
         loginBtn.click();
-        System.out.println("The user was logged in");
+        logger.info("The user was logged in");
 
     }
 }

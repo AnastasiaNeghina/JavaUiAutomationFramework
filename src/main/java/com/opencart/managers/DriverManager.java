@@ -7,19 +7,20 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.time.Duration;
+
 public class DriverManager {
     //    Declaram 3 proprietati private: webDriverType, instance si driver
     private static String webDriverType = ConfigReaderManager.getProperty("browserType");
     private static DriverManager instance;
     private WebDriver driver;
 
-    //    Declaram constructorul clasei de tip private
     private DriverManager() {
         switch (webDriverType.toUpperCase()) {
             case "CHROME":
                 ChromeOptions options = new ChromeOptions();
 //               argumentul din metoda este utilizat pentru a deschide fereastra in modul incognito
-                if (ConfigReaderManager.getProperty("isIncognitoChromeEnabled").equals("true")){
+                if (ConfigReaderManager.getProperty("isIncognitoChromeEnabled").equals("true")) {
                     options.addArguments("--incognito");
                 }
 //               argumentul din metoda este utilizat pentru a rula browserul in modul fara interfata grafica = operatiunile sunt facute fara a deschide o fereastra
@@ -42,6 +43,11 @@ public class DriverManager {
             default:
                 System.out.println("There is not defined such a driver: " + webDriverType);
         }
+        int implicitWaiterValue = Integer.parseInt(ConfigReaderManager.getProperty("implicitWait"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaiterValue));
+
+        int implicitPageLoadValue = Integer.parseInt(ConfigReaderManager.getProperty("implicitLoadWait"));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(implicitPageLoadValue));
     }
 
     //    Metoda statica pentru a obtine instanta Singleton - singura instanta a clasei, accesibila in mod global
