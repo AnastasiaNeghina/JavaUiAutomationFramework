@@ -5,8 +5,12 @@ import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Hooks {
+    private static final Logger logger = LogManager.getLogger(Hooks.class);
     static int counter = 0;
 
     @BeforeAll
@@ -17,17 +21,17 @@ public class Hooks {
     @Before
     public void beforeEachTest() {
         counter++;
-        System.out.println("The Test [" + counter + "] started");
+        logger.log(Level.INFO, "The Test [" + counter + "] started");
     }
 
     @After
     public void afterEachTest() {
         DriverManager.getInstance().quitTheDriver();
-        System.out.println("The Test[" + counter + "] finished!");
+        logger.info("The Test[" + counter + "] finished!");
     }
 
     @AfterAll
     public static void afterAllTheTestsAreExecuted() {
-        System.out.println("The execution of all features is finished!");
+        logger.log(Level.INFO, "The execution of all features is finished!");
     }
 }

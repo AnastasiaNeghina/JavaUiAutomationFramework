@@ -15,6 +15,7 @@ public class RegisterPageSteps {
 
     @When("the registration form is completed with valid random data")
     public void theRegistrationFormIsCompletedWithValidRandomData() {
+
         String firstName = FakeDataManager.getRandomName();
         String lastName = FakeDataManager.getRandomLastName();
         String email = FakeDataManager.getRandomEmail();
